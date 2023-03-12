@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <legend>REGISTRATION FORM</legend>
+    <form id="res" action="" method="post"><br><br>
+        <label>FIRST NAME</label>
+        <input type="text" id="fname" placeholder="ENTER FIRST NAME" required><br><br>
+        <label>LAST NAME</label>
+        <input type="text" id="lname" placeholder="ENTER LAST NAME" required><br><br>
+        <label>DOB</label>
+        <input type="date" name="dob" id="dob" required><br><br>
+        <label>EMAIL-ID</label>
+        <input type="email" name="email" id="email" placeholder="xyz@example.com" required><br><br>
+        <label>PASSWORD</label>
+        <input type="password" name="password" id="password" placeholder="ENTER PASSWORD" required><br><br>
+        <label>CONFIRM PASSWORD</label>
+        <input type="password" name="password" id="confirmpassword" placeholder="RE-ENTER PASSWORD" required><br><br>
+        <label>PHONE NUMBER</label>
+        <input type="number" name="phno" id="phoneno" placeholder="ENTER MOBILE NUMBER " required
+            maxlength="10"><br><br>
+        <label>TELEPHONE NUMBER</label>
+        <input type="number" name="teleno" id="teleno" placeholder="ENTER TELEPHONE  NUMBER " required><br><br>
+        <label>GENDER</label>
+        <input type="radio" id="gender" name="gender" value="MALE">MALE
+        <input type="radio" id="gender" name="gender" value="FEMALE">FEMALE<br><br>
+        <label>ADDRESS</label><br>
+        <textarea id="address" rows="5" cols="25"></textarea><br><br>
+        <label>PERSONAL INTEREST</label><br><br>
+        <input id="BOOK" type="checkbox" name="BOOKS">BOOKS<br>
+        <input id="TRAVELLING" type="checkbox" name="TRAVELLING">TRAVELLING<br>
+        <input id="GARDENING" type="checkbox" name="GARDENING">GARDENING<br>
+        <button type="submit" name="submit" id="submit" onclick="validate()">SUBMIT</button>
+    </form>
+
+    <script>
+        function validate() {
+            const forms = document.getElementById("res");
+
+            const firstname = forms.elements["fname"].value;
+            const lastname = forms.elements["lname"].value;
+            const DOB = forms.elements["dob"].value;
+            const gender = forms.elements["gender"].value;
+            const address = forms.elements["address"].value;
+            const mobno = forms.elements["phoneno"].value;
+            const phno = forms.elements["teleno"].value;
+            const email = forms.elements["email"].value;
+
+            const BOOKS = document.getElementById("BOOK").checked;
+            const TRAVELLING = document.getElementById("TRAVELLING").checked;
+            const GARDENING = document.getElementById("GARDENING").checked;
+            var letters = /^[A-Za-z \s]+$/;
+            var mobpat = /^\(?(\d{2})\)?[- ]?(\d{3})[- ]?(\d{6})$/;
+            var mob = /^[0-9]{10}$/;
+            var emailfil = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+            if (firstname == "") {
+                alert("FIRST NAME CAN'T BE BLANK");
+            }
+            else if (!letters.test(firstname)) {
+                alert(" FIRST NAME SHOULD CONTAIN ONLY ALPHABETS");
+            }
+            else if (lastname == "") {
+                alert("LAST NAME CAN'T BE BLANK");
+            }
+            else if (!letters.test(lastname)) {
+                alert(" LAST NAME SHOULD CONTAIN ONLY ALPHABETS");
+            }
+            else if (password != confirm_password) {
+                alert("PASSWORDS DOES NOT MATCH");
+            }
+            else if (!mobpat.test(teleno)) {
+                alert("TELEPHONE NUMBER DOES NOT MATCH THE  REGURIED PATTERN");
+            }
+            else if (!mob.test(phoneno)) {
+                alert("PHONE NUMBER SHOULD CONTAIN 10 DIGITS");
+            }
+            else if (address == "") {
+                alert("ADDRESS CAN'T BE BLANK ");
+            }
+            else if (emailfil.test(email)) {
+                alert("EMAIL FORMAT IS WRONG");
+            }
+            else {
+                alert("REGISTRATION SUCESSFUL");
+                printfunc(firstname, lastname, gender, address, dob, BOOKS, GARDENING, TRAVELLING, phoneno, teleno, email)
+            }
+        }
+    
+        function printfunc(firstname, lastname, gender, address, dob, BOOKS, GARDENING, TRAVELLING, phoneno, teleno, email) {
+            document.write(" <p><strong>FIRST NAME:</strong> " + firstname + "</p>");
+            document.write(" <p><strong>LAST  NAME:</strong> " + lastname + "</p>");
+            document.write(" <p><strong>DOB:</strong> " + dob + "</p>");
+            document.write(" <p><strong>ADDRESS:</strong> " + address + "</p>");
+            document.write(" <p><strong>PHONE NO:</strong> " + phoneno + "</p>");
+            document.write(" <p><strong>TELEPHONE NO:</strong> " + teleno + "</p>");
+            document.write(" <p><strong>EMAIL:</strong> " + email + "</p>");
+            document.write(" <p><strong>GENDER:</strong> " + gender + "</p>");
+            if (BOOKS) {
+                document.write(" <p><strong>PERSONAL INTEREST:</strong> " + BOOKS + "</p>");
+            }
+            if (GARDENING) {
+                document.write(" <p><strong>PERSONAL INTEREST:</strong> " + GARDENING + "</p>");
+            }
+            if (TRAVELLING) {
+                document.write(" <p><strong>PERSONAL INTEREST:</strong> " + TRAVELLING + "</p>");
+            }
+        }
+
+    </script>
+</body>
+
+</html>

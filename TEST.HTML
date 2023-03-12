@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #formcont {
+           background-color: rgb(229, 195, 234);
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 25px;
+            border-width: 5px;
+            border-style: groove;
+        }
+
+        #reg {
+            color: white;
+            margin-left: 400px;
+            text-shadow: 5px 5px 10px black;
+        }
+
+        input {
+            border-radius: 5px;
+            height: 30px;
+            border:none;
+
+        }
+
+        label {
+            display: inline-block;
+            width: 220px;
+        }
+
+        legend {
+            font-family: Impact, Haettenschweiler, sans-serif;
+            font-style: italic;
+            text-align: center;
+            color: white;
+            text-shadow: 5px 5px 10px black;
+            font-size: x-large;
+            padding-bottom: 15px;
+
+        }
+
+        #sub {
+            margin-left: 250px;
+            height: 50px;
+            width: 90px;
+            border-radius: 50px;
+            border-width: 0px;
+        }
+        #pic{
+            height:200px;
+            width:200px;
+            display:none;
+        }
+    </style>
+</head>
+
+<body>
+   
+    <div id="formcont">
+        <legend>REGISTRATION FORM </legend>
+        <form id="reg" action="" method="post">
+
+            <label> NAME : </label>
+            <input type="text" id="fname" placeholder="ENTER YOUR NAME "><br><br>
+            <label> DATE OF BIRTH : </label>
+            <input type="date" id="dob" placeholder="ENTER YOUR NAME " required><br><br>
+            <label> GENDER : </label>
+            <input type="radio" name="gen" value="male">MALE
+            <input type="radio" name="gen" value="female">FEMALE <br><br>
+            <label> FATHERNAME : </label>
+            <input type="text" id="fathname" placeholder="ENTER YOUR FATHER'S NAME "><br><br>
+            <label> ADDRESS : </label>
+            <textarea rows="5" columns="50" id="add" placeholder="ENTER YOUR ADDRESS "></textarea><br><br>
+            <label> MOBILE NUMBER : </label>
+            <input type="text" id="mob" placeholder="ENTER YOUR MOBILE NUMBER  " maxlength="10"><br><br>
+            <label> PHONE NUMBER : </label>
+            <input type="text" id="phone" placeholder=" XX-XXX-XXXXXX  "><br><br>
+            <label> EMAIL ID : </label>
+            <input type="text" id="email" placeholder="ENTER YOUR MAIL  "><br><br>
+            <label> COLLEGE NAME : </label>
+            <input type="text" id="cname" placeholder="ENTER YOUR COLLEGE NAME "><br><br>
+            <label>MARKS SCORED : </label>
+            <input type="text" id="marks" placeholder="ENTER YOUR MARK : "><br><br>
+            <label> PERSONAL INTEREST : </label>
+
+            <input type="checkbox" name="interest" id="CRICKET">
+            <label>CRICKET </label>
+
+            <input type="checkbox" name="interest" id="TABLE TENNIS">
+            <label>TABLE TENNIS</label>
+
+            <input type="checkbox" name="interest" id="FOOTBALL">
+            <label>FOOTBALL</label>
+            <br><br>
+            <button type="button" name="int" id="sub" onclick="disp()"> SUBMIT </button>
+        </form>
+
+    </div>
+    <script>
+        function disp() {
+            const forms = document.getElementById("reg");
+
+            const name = forms.elements["fname"].value;
+            const DOB = forms.elements["dob"].value;
+            const gender = forms.elements["gen"].value;
+            const fname = forms.elements["fathname"].value;
+            const add = forms.elements["add"].value;
+            const mobno = forms.elements["mob"].value;
+            const phno = forms.elements["phone"].value;
+            const email = forms.elements["email"].value;
+            const clg = forms.elements["cname"].value;
+            const marks = forms.elements["marks"].value;
+
+            var cric = document.getElementById("CRICKET").checked;
+            var tt = document.getElementById("TABLE TENNIS").checked;
+            var ftball = document.getElementById("FOOTBALL").checked;
+            var letters = /^[A-Za-z \s]+$/;
+            var mobpat = /^\(?(\d{2})\)?[- ]?(\d{3})[- ]?(\d{6})$/;
+            var mob = /^[0-9]{10}$/;
+            var emailfil = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            var markpat = /^[+-]?([0-9]*[.])?[0-9]+$/
+
+
+            if (name == "") {
+                alert("NAME CAN'T BE BLANK ");
+            }
+            else if (!letters.test(name)) {
+                alert('NAME FIELD SHOULD ONLY CONTAIN ALPHABET CHARACTERS ! ');
+            }
+            else if (fname == "") {
+                alert("FATHER NAME CAN'T BE BLANK ");
+            }
+            else if (!letters.test(fname)) {
+                alert('NAME FIELD SHOULD ONLY CONTAIN ALPHABET CHARACTERS ! ');
+            }
+            else if (phno == "") {
+                alert("PHONE NUMBER CAN'T BE BLANK ");
+            }
+            else if (!mobpat.test(phno)) {
+                alert('PHONE NUMBER IS NOT IN CORECT FORMAT')
+            }
+            else if (mobno == "") {
+                alert("MOBILE NUMBER CAN'T BE BLANK ");
+            }
+            else if (!mob.test(mobno)) {
+                alert("MOBILE NUMBER SHOULD ONLY CONTAIN NUMBERS ")
+            }
+            else if (!emailfil.test(email)) {
+                alert("EMAIL SHOULD CONTAIN UPPERCASE LOWERCASE NUMBERS AND SPECIAL CHARACTERS ")
+            }
+            else if (!letters.test(clg)) {
+                alert('COLLEGE FIELD SHOULD ONLY CONTAIN ALPHABET CHARACTERS ! ');
+            }
+            else if (!markpat.test(marks)) {
+                alert("MARKS SHOULD NOT CONTAIN ALPHABETS ! ");
+            }
+            else {
+                alert("REGISTRATION SUCCESSFUL ! ");
+                printfunc(name, DOB, gender, fname, add, mobno, phno, email, clg, marks,cric,tt, ftball);
+            }
+
+        }
+        function printfunc(name, DOB, gender, fname, add, mobno, phno, email, clg, marks, cric,tt,ftball) {
+
+            document.write("<h2>Registration Details:</h2>");
+            document.write("<p><strong>Name:</strong> " + name + "</p>");
+            document.write("<p><strong>Date of Birth:</strong> " + DOB + "</p>");
+            document.write("<p><strong>Gender:</strong> " + gender + "</p>");
+            document.write("<p><strong>Father's Name:</strong> " + fname + "</p>");
+            document.write("<p><strong>Address:</strong> " + add + "</p>");
+            document.write("<p><strong>Phone Number:</strong> " + phno + "</p>");
+            document.write("<p><strong>Mobile Number:</strong> " + mobno + "</p>");
+            document.write("<p><strong>Email:</strong> " + email + "</p>");
+            document.write("<p><strong>Course Name:</strong> " + clg + "</p>");
+            document.write("<p><strong>Marks:</strong> " + marks + "</p>");
+            document.write("<p><strong>Skills:</strong></p>");
+            if (cric) {
+                document.write("<p>CRICKET</p>");
+            }
+            if (tt) {
+                document.write("<p>TABLE TENNIS </p>");
+            }
+            if (ftball) {
+                document.write("<p>FOOOTBALL</p>");
+            }
+            displayImage('235-2350916_student-netid-login-transparent-background-student-icon-hd.png',250,250);
+        }
+         
+            function displayImage(src, width, height) {
+ var img = document.createElement("img");
+ img.src = src;
+ img.width = width;
+ img.height = height;
+ document.body.appendChild(img);
+}
+
+
+
+    </script>
+</body>
+
+</html>
